@@ -6,6 +6,12 @@
 
 }
 
+
+
+#app-name {
+    padding: 1vh;
+}
+
 main {
     position: fixed;
     top: 50%;
@@ -20,8 +26,17 @@ main {
 }
 
 button {
+    background-color: rgb(128, 67, 67);
+    color: white;
     text-align: center;
     width: 20vh;
     height: 5vh;
+    border: 1px solid rgb(37, 12, 12);
+    box-shadow: 3px 3px 1px black;
     border-radius: 3vh;
+    transition:all 0.3s ease;
+}
+
+button:hover {
+    background-color: rgb(43, 21, 21);
 }

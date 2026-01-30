@@ -1,19 +1,25 @@
 const stateButton = document.getElementById("state");
 const timeText = document.getElementById("timer");
+const statusButton = document.getElementById("skip");
 
-const working = 25;
-const shortBreak = 5;
+const working = 1;
+const shortBreak = 2;
 const longBreak = 15;
 
 let curMin = 0;
-let curSec = 0;
+let curSec = 2;
 let timer = null;
+let currentStatus = "working";
+let breaksCount = 0;
 
-curMin = working;
+
+// While starting the app ---
+setStatus();
+statusButton.innerText = "finish the session earlier >>>";
+timeText.innerText = `${addZero(curMin)}:${addZero(curSec)}`;
 
 let isOn = false;
 
-timeText.innerText = `${addZero(curMin)}:${addZero(curSec)}`;
 
 function addZero(num) {
     if (num < 10){
@@ -26,25 +32,62 @@ function addZero(num) {
 function startTimer(min, sec){
     
     timer = setInterval(() => {
+        console.log(`Current minute: ${curMin}, Current second: ${curSec} | startTimer() | START`)
 
         sec--;
 
         if (sec < 0) {
-            sec = 59;
+            sec = 5;
             min--;
         }
+        curMin = min;
+        curSec = sec;
+
+        timeText.innerText = `${addZero(min)}:${addZero(sec)}`;
+
 
         if (min < 0){
             clearInterval(timer);
+            changeStatus();
+            changeState();
         }
 
-        timeText.innerText = `${addZero(min)}:${addZero(sec)}`;
-        curMin = min;
-        curSec = sec;
+        console.log(`Current minute: ${curMin}, Current second: ${curSec} | startTimer() | END`)
 
     }, 1000);
 
     
+}
+
+function setStatus(){
+    curSec = 0;
+    if (currentStatus == "working"){
+        curMin = working;
+    } else if (currentStatus == "break") {
+        if (breaksCount < 4) {
+            curMin = shortBreak;
+        } else {
+            curMin = longBreak;
+            breaksCount = 0;
+        }
+        breaksCount++;
+    }
+}
+
+function changeStatus(){
+    if (currentStatus == "working"){
+        currentStatus = "break";
+        statusButton.innerText = "skip the break >>>"
+    } else {
+        currentStatus = "working";
+        statusButton.innerText = "finish the session earlier >>>"
+    }
+    setStatus();
+    clearInterval(timer);
+        clearInterval(timer);
+        stateButton.innerText = "Start";
+        isOn = false;
+    timeText.innerText = `${addZero(curMin)}:${addZero(curSec)}`;
 }
 
 function changeState(){
@@ -57,4 +100,5 @@ function changeState(){
         stateButton.innerText = "Start";
         isOn = false;
     }
+    console.log(`Current minute: ${curMin}, Current second: ${curSec} | changeState()`)
 }
