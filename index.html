@@ -12,14 +12,16 @@
     </div>
     <main>
         <div id="time-block">
-            <canvas></canvas>
+            <canvas height="200" width="200" id="timer-circle" style="border: 1px solid black;"></canvas>
             <p id="timer">00:00</p>
         </div>
         <div id="buttons">
-            <button id="state"></button>
-            <button id="skip"></button>
+            <button id="state" onclick="changeState()">Start</button>
+            <br><br>
+            <button id="skip">-</button>
         </div>
     </main>
     <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/timer.js"></script>
 </body>
 </html>
