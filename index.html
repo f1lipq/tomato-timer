@@ -5,10 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tomato timer 🍅</title>
     <link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <div id="app-name">
-        tomato timer 🍅
+    
+    <div id="app-menu">
+        <p>tomato timer 🍅</p>
+        <div id="menu">
+            <div id="colors">
+                <button onclick="openList()"><i class="fa-solid fa-palette fa-lg" style="color: rgb(37, 12, 12);"></i></button>
+                <div class="options">
+                    <br>
+                    <button class="color-button" onclick="changeColor(this, 'rgb(128, 67, 67)')"><i class="fa-solid fa-circle fa-xl" style="color: rgb(241, 159, 159);"></i></button><br>
+                    <button class="color-button" onclick="changeColor(this, '#326994', '#253b4d')"><i class="fa-solid fa-circle fa-xl" style="color: #74C0FC;"></i></button><br>
+                    <button class="color-button" onclick="changeColor(this, '#38754c', '#173d23')"><i class="fa-solid fa-circle fa-xl" style="color: #74fca1;"></i></button><br>
+                    <button class="color-button" onclick="changeColor(this, '#616161', '#fffed4')"><i class="fa-solid fa-circle fa-xl" style="color: #222222;"></i></button><br>
+                </div>
+            </div>
+        </div>
     </div>
     <main>
         <div id="time-block">
@@ -24,5 +38,6 @@
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/timer.js"></script>
     <script src="./assets/js/canvas.js"></script>
+    <script src="./assets/js/menu.js"></script>
 </body>
 </html>

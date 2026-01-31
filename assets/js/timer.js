@@ -109,7 +109,7 @@ function changeStatus(){
     ctx.arc(150, 150, 140, angle ,lineLenght);
     ctx.stroke();
 
-    console.log(`BREAKS NUM: ${breaksCount}, BREAK TIME: ${checkBreakType()}||| CURRENT MINUTE: ${curMin}, CURRENT SECOND: ${curSec}`)
+    //console.log(`BREAKS NUM: ${breaksCount}, BREAK TIME: ${checkBreakType()}||| CURRENT MINUTE: ${curMin}, CURRENT SECOND: ${curSec}`)
 }
 
 function setStatus(){
