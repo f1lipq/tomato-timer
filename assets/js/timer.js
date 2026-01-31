@@ -2,8 +2,8 @@ const stateButton = document.getElementById("state");
 const timeText = document.getElementById("timer");
 const statusButton = document.getElementById("skip");
 
-const working = 1;
-const shortBreak = 2;
+const working = 25;
+const shortBreak = 5;
 const longBreak = 15;
 
 let curMin = 0;
@@ -11,6 +11,8 @@ let curSec = 2;
 let timer = null;
 let currentStatus = "working";
 let breaksCount = 0;
+
+let endingPct = working;
 
 
 // While starting the app ---
@@ -29,15 +31,27 @@ function addZero(num) {
     }
 }
 
+function changePct(t){
+        if (currentStatus == "working"){
+                    endingPct = t / working * 100
+        } else if (currentStatus == "break") {
+                    endingPct = t / shortBreak * 100
+        }
+        lineLenght = (Math.PI * 2 * endingPct) / 100;
+}
+
 function startTimer(min, sec){
     
     timer = setInterval(() => {
-        console.log(`Current minute: ${curMin}, Current second: ${curSec} | startTimer() | START`)
+        //console.log(`Current minute: ${curMin}, Current second: ${curSec} | startTimer() | START`)
 
+        ctx.clearRect(0, 0, c.width, c.height)
+
+        ctx.beginPath();
         sec--;
 
         if (sec < 0) {
-            sec = 5;
+            sec = 59;
             min--;
         }
         curMin = min;
@@ -49,10 +63,14 @@ function startTimer(min, sec){
         if (min < 0){
             clearInterval(timer);
             changeStatus();
-            changeState();
+            //console.log(`MODE CHANGED. CURRENT MINUTE: ${curMin}, IS ON? ${isOn}`);
         }
+                changePct(curMin);
+        ctx.arc(150, 150, 140, angle ,lineLenght);
+        ctx.stroke();
 
-        console.log(`Current minute: ${curMin}, Current second: ${curSec} | startTimer() | END`)
+
+        //console.log(`Current minute: ${curMin}, Current second: ${curSec}, Current status: ${currentStatus} | startTimer() | END`)
 
     }, 1000);
 
@@ -100,5 +118,5 @@ function changeState(){
         stateButton.innerText = "Start";
         isOn = false;
     }
-    console.log(`Current minute: ${curMin}, Current second: ${curSec} | changeState()`)
+    //console.log(`Current minute: ${curMin}, Current second: ${curSec} | changeState()`)
 }
