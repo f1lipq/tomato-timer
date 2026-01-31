@@ -22,6 +22,14 @@ timeText.innerText = `${addZero(curMin)}:${addZero(curSec)}`;
 
 let isOn = false;
 
+function checkBreakType(){
+        if (breaksCount < 4) {
+            return shortBreak;
+        } else {
+            return longBreak;
+        }
+}
+
 
 function addZero(num) {
     if (num < 10){
@@ -35,7 +43,7 @@ function changePct(t){
         if (currentStatus == "working"){
                     endingPct = t / working * 100
         } else if (currentStatus == "break") {
-                    endingPct = t / shortBreak * 100
+                    endingPct = t / checkBreakType() * 100
         }
         lineLenght = (Math.PI * 2 * endingPct) / 100;
 }
@@ -57,7 +65,7 @@ function startTimer(min, sec){
         curMin = min;
         curSec = sec;
 
-        timeText.innerText = `${addZero(min)}:${addZero(sec)}`;
+        timeText.innerText = `${addZero(curMin)}:${addZero(curSec)}`;
 
 
         if (min < 0){
@@ -77,21 +85,6 @@ function startTimer(min, sec){
     
 }
 
-function setStatus(){
-    curSec = 0;
-    if (currentStatus == "working"){
-        curMin = working;
-    } else if (currentStatus == "break") {
-        if (breaksCount < 4) {
-            curMin = shortBreak;
-        } else {
-            curMin = longBreak;
-            breaksCount = 0;
-        }
-        breaksCount++;
-    }
-}
-
 function changeStatus(){
     if (currentStatus == "working"){
         currentStatus = "break";
@@ -101,11 +94,35 @@ function changeStatus(){
         statusButton.innerText = "finish the session earlier >>>"
     }
     setStatus();
+    if (currentStatus == "break"){
+        curMin = checkBreakType();
+    }
     clearInterval(timer);
-        clearInterval(timer);
-        stateButton.innerText = "Start";
-        isOn = false;
+    stateButton.innerText = "Start";
+    isOn = false;
     timeText.innerText = `${addZero(curMin)}:${addZero(curSec)}`;
+
+    ctx.clearRect(0, 0, c.width, c.height)
+
+    ctx.beginPath();
+    changePct(curMin);
+    ctx.arc(150, 150, 140, angle ,lineLenght);
+    ctx.stroke();
+
+    console.log(`BREAKS NUM: ${breaksCount}, BREAK TIME: ${checkBreakType()}||| CURRENT MINUTE: ${curMin}, CURRENT SECOND: ${curSec}`)
+}
+
+function setStatus(){
+    curSec = 0;
+    if (currentStatus == "working"){
+        curMin = working;
+    } else if (currentStatus == "break") {
+        if (breaksCount < 4) {
+            breaksCount++;
+        } else {
+            breaksCount = 0;
+        }
+    }
 }
 
 function changeState(){
