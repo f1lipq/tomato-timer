@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tomato timer</title>
+    <title>tomato timer 🍅</title>
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
@@ -12,16 +12,17 @@
     </div>
     <main>
         <div id="time-block">
-            <canvas height="200" width="200" id="timer-circle" style="border: 1px solid black;"></canvas>
+            <canvas height="300" width="300" id="timer-circle"></canvas>
             <p id="timer">00:00</p>
         </div>
         <div id="buttons">
             <button id="state" onclick="changeState()">Start</button>
             <br><br>
-            <button id="skip">-</button>
+            <button id="skip" onclick="changeStatus()">-</button>
         </div>
     </main>
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/timer.js"></script>
+    <script src="./assets/js/canvas.js"></script>
 </body>
 </html>
